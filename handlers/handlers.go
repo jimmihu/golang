@@ -8,7 +8,7 @@ import (
 )
 
 func HandleReq() {
-	log.Println("Start development server localhost:9999")
+	log.Println("Start development server localhost:8009")
 	//bikin router dengan gorilla/mux
 	myRouter := mux.NewRouter().StrictSlash(true)
 	//routing
@@ -17,5 +17,5 @@ func HandleReq() {
 	myRouter.HandleFunc("/users/{page}/{take}", GetUsers).Methods("OPTIONS", "GET")
 	myRouter.HandleFunc("/user/{id}", GetDetail).Methods("OPTIONS", "GET")
 	//serving
-	log.Fatal(http.ListenAndServe(":9999", myRouter))
+	log.Fatal(http.ListenAndServe(":8009", myRouter))
 }
