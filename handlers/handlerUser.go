@@ -9,11 +9,49 @@ import (
 	"net/http"
 
 	"github.com/gorilla/mux"
+	"golang.org/x/crypto/bcrypt"
 )
 
+func HashPassword(password string) (string, error) {
+	bytes, err := bcrypt.GenerateFromPassword([]byte(password), 14)
+	return string(bytes), err
+}
+
+func CheckPasswordHash(password, hash string) bool {
+	err := bcrypt.CompareHashAndPassword([]byte(hash), []byte(password))
+	return err == nil
+}
+
+func Login(w http.ResponseWriter, r *http.Request) {
+	payloads, _ := ioutil.ReadAll(r.Body)
+	//ambil data login
+	var user structs.User
+	json.Unmarshal(payloads, &user)
+
+	var dbuser structs.User
+	//ambil data user dari db
+	connections.DB.
+		Where("name =?", user.Name).
+		First(&dbuser)
+	//cek password
+	var res structs.Result
+	if CheckPasswordHash(user.Password, dbuser.Password) {
+		res = structs.Result{Code: 200, Data: users, Message: "Logged in!"}
+	} else {
+		res = structs.Result{Code: 200, Data: users, Message: "Wrong name or password!"}
+	}
+	results, err := json.Marshal(res)
+
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	w.Write(results)
+}
+
 func HomePage(w http.ResponseWriter, r *http.Request) {
-	Checkcookies(w, r)
-	Refreshcookies(w, r)
 	fmt.Fprintf(w, "Welcome! by Jimmi")
 }
 
@@ -24,6 +62,8 @@ func CreateUser(w http.ResponseWriter, r *http.Request) {
 	var user structs.User
 	//masukin data request ke user
 	json.Unmarshal(payloads, &user)
+	password, _ := HashPassword(user.Password)
+	user.Password = password
 	var risk structs.Risk_profile
 	//bikin risk profile dengan condition
 	risk.UserID = user.ID
@@ -58,8 +98,6 @@ func CreateUser(w http.ResponseWriter, r *http.Request) {
 }
 
 func GetUsers(w http.ResponseWriter, r *http.Request) {
-	Checkcookies(w, r)
-	Refreshcookies(w, r)
 	//set limit & offset
 	vars := mux.Vars(r)
 	page := vars["page"]
@@ -85,8 +123,6 @@ func GetUsers(w http.ResponseWriter, r *http.Request) {
 }
 
 func GetDetail(w http.ResponseWriter, r *http.Request) {
-	Checkcookies(w, r)
-	Refreshcookies(w, r)
 	//set id
 	vars := mux.Vars(r)
 	id := vars["id"]

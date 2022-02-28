@@ -12,8 +12,8 @@ func HandleReq() {
 	//bikin router dengan gorilla/mux
 	myRouter := mux.NewRouter().StrictSlash(true)
 	//routing
-	myRouter.HandleFunc("/signin", Signin)
 	myRouter.HandleFunc("/", HomePage)
+	myRouter.HandleFunc("/login", Login).Methods("OPTIONS", "POST")
 	myRouter.HandleFunc("/user", CreateUser).Methods("OPTIONS", "POST")
 	myRouter.HandleFunc("/users/{page}/{take}", GetUsers).Methods("OPTIONS", "GET")
 	myRouter.HandleFunc("/user/{id}", GetDetail).Methods("OPTIONS", "GET")
