@@ -36,9 +36,9 @@ func Login(w http.ResponseWriter, r *http.Request) {
 	//cek password
 	var res structs.Result
 	if CheckPasswordHash(user.Password, dbuser.Password) {
-		res = structs.Result{Code: 200, Data: users, Message: "Logged in!"}
+		res = structs.Result{Code: 200, Data: user, Message: "Logged in!"}
 	} else {
-		res = structs.Result{Code: 200, Data: users, Message: "Wrong name or password!"}
+		res = structs.Result{Code: 200, Data: user, Message: "Wrong name or password!"}
 	}
 	results, err := json.Marshal(res)
 
