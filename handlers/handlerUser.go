@@ -14,7 +14,7 @@ import (
 func HomePage(w http.ResponseWriter, r *http.Request) {
 	Checkcookies(w, r)
 	Refreshcookies(w, r)
-	fmt.Println("Welcome! by Jimmi")
+	fmt.Fprintf(w, "Welcome! by Jimmi")
 }
 
 func CreateUser(w http.ResponseWriter, r *http.Request) {
