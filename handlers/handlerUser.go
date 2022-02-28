@@ -3,11 +3,12 @@ package handlers
 import (
 	"day2/connections"
 	"day2/structs"
-	"day2/vendor/github.com/dgrijalva/jwt-go"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
 	"net/http"
+
+	"github.com/dgrijalva/jwt-go"
 
 	"github.com/gorilla/mux"
 )
