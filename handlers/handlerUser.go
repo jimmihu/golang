@@ -100,9 +100,9 @@ func CreateUser(w http.ResponseWriter, r *http.Request) {
 func GetUsers(w http.ResponseWriter, r *http.Request) {
 	//set limit & offset
 	payloads, _ := ioutil.ReadAll(r.Body)
-	var payload = make(map[string]string)
-	payload["limit"] = ""
-	payload["offset"] = ""
+	var payload = make(map[string]int)
+	payload["limit"] = 1
+	payload["offset"] = 1
 	json.Unmarshal(payloads, &payload)
 	lim := payload["limit"]
 	offs := payload["offset"]
