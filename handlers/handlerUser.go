@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
+	"strconv"
 
 	"github.com/gorilla/mux"
 	"golang.org/x/crypto/bcrypt"
@@ -99,19 +100,16 @@ func CreateUser(w http.ResponseWriter, r *http.Request) {
 
 func GetUsers(w http.ResponseWriter, r *http.Request) {
 	//set limit & offset
-	payloads, _ := ioutil.ReadAll(r.Body)
-	var payload = make(map[string]int)
-	payload["limit"] = 1
-	payload["offset"] = 1
-	json.Unmarshal(payloads, &payload)
-	lim := payload["limit"]
-	offs := payload["offset"]
-
+	var lim, offs string
+	lim = r.URL.Query().Get("limit")
+	offs = r.URL.Query().Get("offset")
+	intlim, _ := strconv.Atoi(lim)
+	intoffs, _ := strconv.Atoi(offs)
 	users := []structs.User{}
 	//ambil data users dari db
 	connections.DB.
-		Limit(lim).
-		Offset(offs).
+		Limit(intlim).
+		Offset(intoffs).
 		Find(&users)
 	//return
 	res := structs.Result{Code: 200, Data: users, Message: "Success get User list"}
