@@ -103,8 +103,11 @@ func GetUsers(w http.ResponseWriter, r *http.Request) {
 	var lim, offs string
 	lim = r.URL.Query().Get("limit")
 	offs = r.URL.Query().Get("offset")
-	intlim, _ := strconv.Atoi(lim)
-	intoffs, _ := strconv.Atoi(offs)
+	var intlim, intoffs int
+	intlim = 10
+	intoffs = 1
+	intlim, _ = strconv.Atoi(lim)
+	intoffs, _ = strconv.Atoi(offs)
 	users := []structs.User{}
 	//ambil data users dari db
 	connections.DB.
