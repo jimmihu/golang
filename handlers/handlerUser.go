@@ -99,15 +99,19 @@ func CreateUser(w http.ResponseWriter, r *http.Request) {
 
 func GetUsers(w http.ResponseWriter, r *http.Request) {
 	//set limit & offset
-	vars := mux.Vars(r)
-	page := vars["page"]
-	take := vars["take"]
+	payloads, _ := ioutil.ReadAll(r.Body)
+	var payload = make(map[string]string)
+	payload["limit"] = ""
+	payload["offset"] = ""
+	json.Unmarshal(payloads, &payload)
+	lim := payload["limit"]
+	offs := payload["offset"]
 
 	users := []structs.User{}
 	//ambil data users dari db
 	connections.DB.
-		Limit(page).
-		Offset(take).
+		Limit(lim).
+		Offset(offs).
 		Find(&users)
 	//return
 	res := structs.Result{Code: 200, Data: users, Message: "Success get User list"}

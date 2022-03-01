@@ -15,7 +15,7 @@ func HandleReq() {
 	myRouter.HandleFunc("/", HomePage)
 	myRouter.HandleFunc("/login", Login).Methods("OPTIONS", "POST")
 	myRouter.HandleFunc("/user", CreateUser).Methods("OPTIONS", "POST")
-	myRouter.HandleFunc("/users/{page}/{take}", GetUsers).Methods("OPTIONS", "GET")
+	myRouter.HandleFunc("/users", GetUsers).Methods("OPTIONS", "GET")
 	myRouter.HandleFunc("/user/{id}", GetDetail).Methods("OPTIONS", "GET")
 	//serving
 	log.Fatal(http.ListenAndServe(":8009", myRouter))
