@@ -12,7 +12,7 @@ import {
   CRow,
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
-import { cilLockLocked, cilUser } from '@coreui/icons'
+import { cilCalendar, cilLockLocked, cilUser } from '@coreui/icons'
 
 const Register = () => {
   return (
@@ -32,8 +32,10 @@ const Register = () => {
                     <CFormInput placeholder="Username" autoComplete="username" />
                   </CInputGroup>
                   <CInputGroup className="mb-3">
-                    <CInputGroupText>@</CInputGroupText>
-                    <CFormInput placeholder="Email" autoComplete="email" />
+                    <CInputGroupText>
+                      <CIcon icon={cilCalendar} />
+                    </CInputGroupText>
+                    <CFormInput placeholder="Age" autoComplete="age" />
                   </CInputGroup>
                   <CInputGroup className="mb-3">
                     <CInputGroupText>
