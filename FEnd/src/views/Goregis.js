@@ -14,7 +14,7 @@ import {
 import CIcon from '@coreui/icons-react'
 import { cilCalendar, cilLockLocked, cilUser } from '@coreui/icons'
 
-const Register = () => {
+const Goregis = () => {
   return (
     <div className="bg-light min-vh-100 d-flex flex-row align-items-center">
       <CContainer>
@@ -30,6 +30,12 @@ const Register = () => {
                       <CIcon icon={cilUser} />
                     </CInputGroupText>
                     <CFormInput placeholder="Username" autoComplete="username" />
+                  </CInputGroup>
+                  <CInputGroup className="mb-3">
+                    <CInputGroupText>
+                      <CIcon icon={cilCalendar} />
+                    </CInputGroupText>
+                    <CFormInput placeholder="Age" autoComplete="age" />
                   </CInputGroup>
                   <CInputGroup className="mb-3">
                     <CInputGroupText>
@@ -64,4 +70,4 @@ const Register = () => {
   )
 }
 
-export default Register
+export default Goregis
