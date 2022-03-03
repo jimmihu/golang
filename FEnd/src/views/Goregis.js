@@ -35,7 +35,7 @@ const Goregis = () => {
       .catch((err) => {
         console.log(err);
       });
-      this.props.history.push('#/user/list')
+      window.location.href = "#/user/list"
   };
   return (
     <div className="bg-light min-vh-100 d-flex flex-row align-items-center">
