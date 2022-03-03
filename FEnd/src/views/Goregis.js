@@ -22,16 +22,12 @@ const Goregis = () => {
 
   const handleRegis = (e) => {
     e.preventDefault()
-    console.log("name :", name)
-    console.log("age :", age)
-    console.log("password :", password)
     axios
       .post(`/user`, { 
             name: name, 
             age: parseInt(age), 
             password: password})
       .then((res) => {
-        console.log(res.data)
         if (res.data) {
           localStorage.setItem("user", JSON.stringify(res.data.data));
         }
@@ -73,7 +69,7 @@ const Goregis = () => {
                     />
                   </CInputGroup>
                   <div className="d-grid">
-                    <CButton color="success">Create</CButton>
+                    <CButton type="submit" color="success">Create</CButton>
                   </div>
                 </CForm>
               </CCardBody>

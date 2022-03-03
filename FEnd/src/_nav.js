@@ -291,6 +291,16 @@ const _nav = [
         name: 'Error 500',
         to: '/500',
       },
+      {
+        component: CNavItem,
+        name: 'Create User',
+        to: '/user/new',
+      },
+      {
+        component: CNavItem,
+        name: 'User list',
+        to: '/user/list',
+      },
     ],
   },
 ]
