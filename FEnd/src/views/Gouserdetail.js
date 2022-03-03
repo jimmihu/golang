@@ -21,7 +21,7 @@ const Gouserdetail = () => {
             if (res.data) {
               localStorage.setItem("users", JSON.stringify(res.data.data));
               setUser(res.data.data)
-              setRisk(res.data.data.Risk_profile)
+              setRisk(res.data.data.risk_profile)
             }
           })
           .catch((err) => {
