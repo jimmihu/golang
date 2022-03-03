@@ -14,7 +14,7 @@ import {
   CRow,
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
-import { cilCalendar, cilLockLocked, cilUser } from '@coreui/icons'
+import {  cilLockLocked, cilUser } from '@coreui/icons'
 
 const Login = () => {
   return (
