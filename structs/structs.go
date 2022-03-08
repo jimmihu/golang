@@ -2,7 +2,7 @@ package structs
 
 //struct risk_profile dgn foreign key ke user ID
 type Risk_profile struct {
-	UserID        int     `json:"userid" gorm:"primaryKey"`
+	UserID        int     `json:"userid"`
 	MM_percent    float32 `json:"mm_percent"`
 	Bond_percent  float32 `json:"bond_percent"`
 	Stock_percent float32 `json:"stock_percent"`
@@ -14,7 +14,7 @@ type User struct {
 	Name         string       `json:"name"`
 	Age          int          `json:"age"`
 	Password     string       `json:"password"`
-	Risk_profile Risk_profile `json:"risk_profile" `
+	Risk_profile Risk_profile `json:"risk_profile" gorm:"foreignKey:UserID"`
 }
 
 // Result is an array of post
