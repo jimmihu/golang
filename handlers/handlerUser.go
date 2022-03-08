@@ -36,12 +36,12 @@ func Login(w http.ResponseWriter, r *http.Request) {
 		Where("name =?", user.Name).
 		First(&dbuser)
 
-	dbuser.Password = "secret"
 	var res structs.Result
 	if CheckPasswordHash(user.Password, dbuser.Password) {
+		dbuser.Password = "secret"
 		res = structs.Result{Code: 200, Data: dbuser, Message: "Logged in!"}
 	} else {
-		res = structs.Result{Code: 200, Data: dbuser, Message: "Wrong name or password!"}
+		res = structs.Result{Code: 401, Data: dbuser, Message: "Wrong name or password!"}
 	}
 	results, err := json.Marshal(res)
 
