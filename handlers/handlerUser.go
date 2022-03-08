@@ -65,23 +65,19 @@ func CreateUser(w http.ResponseWriter, r *http.Request) {
 	json.Unmarshal(payloads, &user)
 	password, _ := HashPassword(user.Password)
 	user.Password = password
-	var risk structs.Risk_profile
-	//bikin risk profile dengan condition
-	risk.UserID = user.ID
 	if user.Age < 20 {
-		risk.Stock_percent = 34.5
-		risk.Bond_percent = 45.5
-		risk.MM_percent = 100 - (risk.Stock_percent + risk.Bond_percent)
+		user.Risk_profile.Stock_percent = 34.5
+		user.Risk_profile.Bond_percent = 45.5
+		user.Risk_profile.MM_percent = 100 - (user.Risk_profile.Stock_percent + user.Risk_profile.Bond_percent)
 	} else if 30 > user.Age && user.Age >= 20 {
-		risk.Stock_percent = 54.5
-		risk.Bond_percent = 25.5
-		risk.MM_percent = 100 - (risk.Stock_percent + risk.Bond_percent)
+		user.Risk_profile.Stock_percent = 54.5
+		user.Risk_profile.Bond_percent = 25.5
+		user.Risk_profile.MM_percent = 100 - (user.Risk_profile.Stock_percent + user.Risk_profile.Bond_percent)
 	} else if user.Age >= 30 {
-		risk.Stock_percent = 72.5
-		risk.Bond_percent = 21.5
-		risk.MM_percent = 100 - (risk.Stock_percent + risk.Bond_percent)
+		user.Risk_profile.Stock_percent = 72.5
+		user.Risk_profile.Bond_percent = 21.5
+		user.Risk_profile.MM_percent = 100 - (user.Risk_profile.Stock_percent + user.Risk_profile.Bond_percent)
 	}
-	user.Risk_profile = risk
 	//create user
 	connections.DB.Create(&user)
 	//return

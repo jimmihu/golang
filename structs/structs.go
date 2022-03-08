@@ -2,7 +2,7 @@ package structs
 
 //struct risk_profile dgn foreign key ke user ID
 type Risk_profile struct {
-	UserID        int     `json:"userid"`
+	UserID        uint    `json:"userid"`
 	MM_percent    float32 `json:"mm_percent"`
 	Bond_percent  float32 `json:"bond_percent"`
 	Stock_percent float32 `json:"stock_percent"`
