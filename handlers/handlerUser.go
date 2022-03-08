@@ -41,7 +41,7 @@ func Login(w http.ResponseWriter, r *http.Request) {
 		dbuser.Password = "secret"
 		res = structs.Result{Code: 200, Data: dbuser, Message: "Logged in!"}
 	} else {
-		res = structs.Result{Code: 401, Data: dbuser, Message: "Wrong name or password!"}
+		res = structs.Result{Code: 401, Data: "Wrong name or password!", Message: "Wrong name or password!"}
 	}
 	results, err := json.Marshal(res)
 
