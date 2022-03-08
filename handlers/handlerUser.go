@@ -99,10 +99,10 @@ func GetUsers(w http.ResponseWriter, r *http.Request) {
 	//set limit & offset
 	intlim, err1 := strconv.Atoi(r.URL.Query().Get("limit"))
 	intoffs, err2 := strconv.Atoi(r.URL.Query().Get("offset"))
-	if err1 != nil {
+	if err1 != nil || intlim < 1 {
 		intlim = 10
 	}
-	if err2 != nil {
+	if err2 != nil || intlim < 1 {
 		intoffs = 0
 	}
 	users := []structs.User{}
