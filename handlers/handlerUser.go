@@ -98,14 +98,14 @@ func CreateUser(w http.ResponseWriter, r *http.Request) {
 func GetUsers(w http.ResponseWriter, r *http.Request) {
 	//set limit & offset
 	var lim, offs string
+	lim = r.URL.Query().Get("limit")
+	offs = r.URL.Query().Get("offset")
 	var intlim, intoffs int
-	intlim = 10
-	intoffs = 0
-	if r != nil {
-		lim = r.URL.Query().Get("limit")
-		offs = r.URL.Query().Get("offset")
-		intlim, _ = strconv.Atoi(lim)
-		intoffs, _ = strconv.Atoi(offs)
+	intlim, _ = strconv.Atoi(lim)
+	intoffs, _ = strconv.Atoi(offs)
+	if r == nil {
+		intlim = 10
+		intoffs = 0
 	}
 	users := []structs.User{}
 	//ambil data users dari db
