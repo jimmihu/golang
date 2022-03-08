@@ -14,7 +14,7 @@ type User struct {
 	Name         string       `json:"name"`
 	Age          int          `json:"age"`
 	Password     string       `json:"password"`
-	Risk_profile Risk_profile `json:"risk_profile"`
+	Risk_profile Risk_profile `json:"risk_profile" gorm:"foreignKey:UserID;references:ID"`
 }
 
 // Result is an array of post
