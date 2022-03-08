@@ -35,7 +35,8 @@ func Login(w http.ResponseWriter, r *http.Request) {
 		Preload("Risk_profile").
 		Where("name =?", user.Name).
 		First(&dbuser)
-	//cek password
+
+	dbuser.Password = "secret"
 	var res structs.Result
 	if CheckPasswordHash(user.Password, dbuser.Password) {
 		res = structs.Result{Code: 200, Data: dbuser, Message: "Logged in!"}
@@ -82,6 +83,7 @@ func CreateUser(w http.ResponseWriter, r *http.Request) {
 	//create user
 	connections.DB.Create(&user)
 	//return
+	user.Password = "secret"
 	res := structs.Result{Code: 200, Data: user, Message: "Success create new User & User's Risk profile"}
 
 	result, err := json.Marshal(res)
@@ -133,13 +135,10 @@ func GetDetail(w http.ResponseWriter, r *http.Request) {
 	user := structs.User{}
 	//ambil data user dari db
 	connections.DB.
+		Preload("Risk_profile").
 		First(&user, id)
-	risk_profile := structs.Risk_profile{}
-	//ambil data risk dari db
-	connections.DB.
-		First(&risk_profile, "user_id =?", user.ID)
-	user.Risk_profile = risk_profile
 	//return
+	user.Password = "secret"
 	res := structs.Result{Code: 200, Data: user, Message: "Success get User Detail"}
 	results, err := json.Marshal(res)
 
