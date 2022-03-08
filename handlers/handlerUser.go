@@ -32,6 +32,7 @@ func Login(w http.ResponseWriter, r *http.Request) {
 	var dbuser structs.User
 	//ambil data user dari db
 	connections.DB.
+		Preload("Risk_profile").
 		Where("name =?", user.Name).
 		First(&dbuser)
 	//cek password
