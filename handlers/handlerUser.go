@@ -115,6 +115,9 @@ func GetUsers(w http.ResponseWriter, r *http.Request) {
 		Offset(intoffs).
 		Find(&users)
 	//return
+	for i := range users {
+		users[i].Password = "secret"
+	}
 	res := structs.Result{Code: 200, Data: users, Message: "Success get User list"}
 	results, err := json.Marshal(res)
 
