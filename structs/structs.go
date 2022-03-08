@@ -10,11 +10,11 @@ type Risk_profile struct {
 
 //struct user
 type User struct {
-	ID             int          `json:"id"`
-	Name           string       `json:"name"`
-	Age            int          `json:"age"`
-	Password       string       `json:"password"`
-	Risk_profileID Risk_profile `json:"risk_profile" gorm:"primaryKey"`
+	ID           int          `json:"id"`
+	Name         string       `json:"name"`
+	Age          int          `json:"age"`
+	Password     string       `json:"password"`
+	Risk_profile Risk_profile `json:"risk_profile" gorm:"primaryKey"`
 }
 
 // Result is an array of post
