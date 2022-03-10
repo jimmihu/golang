@@ -11,7 +11,8 @@ import {
     CTableHeaderCell,
     CTableRow,
     CContainer,
-    CLink
+    CLink,
+    CButton
 } from '@coreui/react'
 import axios from '../axios'
 
@@ -47,14 +48,16 @@ const Gouserlist = () => {
                     <CTableHeaderCell scope="col">ID</CTableHeaderCell>
                     <CTableHeaderCell scope="col">Name</CTableHeaderCell>
                     <CTableHeaderCell scope="col">Age</CTableHeaderCell>
+                    <CTableHeaderCell scope="col">Actions</CTableHeaderCell>
                     </CTableRow>
                 </CTableHead>
                 <CTableBody>
                 {users.map((user, index) => (  
                     <CTableRow key={index} >
                     <CTableHeaderCell scope="row">{user.id}</CTableHeaderCell>
-                    <CTableDataCell><CLink href={"#/user/"+user.id}>{user.name}</CLink></CTableDataCell>
+                    <CTableDataCell>{user.name}</CTableDataCell>
                     <CTableDataCell>{user.age}</CTableDataCell>
+                    <CTableDataCell><CLink href={"#/user/"+user.id}><CButton>Detail</CButton></CLink></CTableDataCell>
                     </CTableRow>
                 ))}  
                 </CTableBody>

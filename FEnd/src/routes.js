@@ -49,9 +49,16 @@ const Modals = React.lazy(() => import('./views/notifications/modals/Modals'))
 const Toasts = React.lazy(() => import('./views/notifications/toasts/Toasts'))
 
 const Widgets = React.lazy(() => import('./views/widgets/Widgets'))
+const Goregis = React.lazy(() => import('./views/Goregis'))
+const Gouserlist = React.lazy(() => import('./views/Gouserlist'))
+const Gouserdetail = React.lazy(() => import('./views/Gouserdetail'))
 
 const routes = [
   { path: '/', exact: true, name: 'Home' },
+  { path: '/user', exact: true, name: 'User Management',component: Gouserlist },
+  { path: '/user/list', name: 'User List', component: Gouserlist },
+  { path: '/user/new', name: 'Create User', component: Goregis },
+  { path: '/user/:id', name: 'User Detail', component: Gouserdetail },
   { path: '/dashboard', name: 'Dashboard', component: Dashboard },
   { path: '/theme', name: 'Theme', component: Colors, exact: true },
   { path: '/theme/colors', name: 'Colors', component: Colors },
